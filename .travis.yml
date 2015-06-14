@@ -6,7 +6,7 @@ android:
     - android-22
 
     # List of Android SDK components
-    - addon-google_apis-google-22
+    - sys-img-armeabi-v7a-android-22
 
     # Emulator components
     - sys-img-armeabi-v7a-android-22
