@@ -19,9 +19,9 @@ android:
 jdk:
   - oraclejdk8
 
-cache:
-  directories:
-    - $HOME/.gradle
+ notifications:
+   email: false
+
 
 before_install:
   - chmod +x ./gradlew
