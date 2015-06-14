@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/IgorGanapolsky/RussianVideoSearch.png?label=ready&title=Ready)](https://waffle.io/IgorGanapolsky/RussianVideoSearch)
 # RussianVideoSearch
 Android application allowing users to type in Russian and search for videos.
 
