@@ -22,6 +22,9 @@ cache:
   directories:
     - $HOME/.gradle
 
+before_install:
+  - echo yes | android update sdk --all --filter build-tools-22.0.1 --no-ui --force
+
 # Emulator Management: Create, Start and Wait
 before_script:
   - echo no | android create avd --force -n test -t "Google Inc.:Google APIs:22" --abi google_apis/armeabi-v7a
@@ -31,11 +34,7 @@ before_script:
 
 script:
 #define test scripts here
-  - ./app/gradlew build connectedCheck
-#  - ./app/gradlew unitTest assemble
-
-#after_success:
-#  - .buildscript/deploy_snapshot.sh
+  - ./Application/gradlew build connectedCheck
 
 after_success:
 #upload build to TestDroid or Apkudo
