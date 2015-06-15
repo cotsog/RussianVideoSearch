@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.eazyigz.RussiaMediaSearch"
         minSdkVersion rootProject.ext.minSdk
-        targetSdkVersion 'MNC'
+        targetSdkVersion rootProject.ext.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -27,10 +27,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.+'
     compile 'com.android.support:design:22.+'
+    compile 'com.android.support:recyclerview-v7:22.+'
     compile 'com.jakewharton:butterknife:6.1.0'
-
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.2'
     androidTestCompile 'com.android.support.test:rules:0.2'

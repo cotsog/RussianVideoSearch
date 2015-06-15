@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-//        adapter.addFragment(new CheeseListFragment(), "Search");
-//        adapter.addFragment(new CheeseListFragment(), "YouTube");
-//        adapter.addFragment(new CheeseListFragment(), "Yandex");
-//        adapter.addFragment(new CheeseListFragment(), "Google");
-//        adapter.addFragment(new CheeseListFragment(), "VKontakte");
+        adapter.addFragment(new CheeseListFragment(), "Search");
+        adapter.addFragment(new CheeseListFragment(), "YouTube");
+        adapter.addFragment(new CheeseListFragment(), "Yandex");
+        adapter.addFragment(new CheeseListFragment(), "Google");
+        adapter.addFragment(new CheeseListFragment(), "VKontakte");
         viewPager.setAdapter(adapter);
     }
 

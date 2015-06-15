@@ -17,6 +17,6 @@ allprojects {
 
 
 ext {
-    minSdk = 'MNC'
-    targetSdk = 'MNC'
+    minSdk = 11
+    targetSdk = 22
 }
