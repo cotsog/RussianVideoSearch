@@ -1,3 +1,15 @@
+machine:
+  environment:
+    ANDROID_HOME: /home/ubuntu/android
+
+dependencies:
+  cache_directories:
+    - ~/.android
+    - ~/android
+  override:
+    - (echo "Downloading Android SDK v22 now!")
+    - (source scripts/environmentSetup.sh && getAndroidSDK)
+
 test:
   pre:
     - chmod +x ./gradlew
