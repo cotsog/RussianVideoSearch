@@ -8,7 +8,6 @@ dependencies:
     - ~/android
   override:
     - (echo "Downloading Android SDK v22 now!")
-    - (source scripts/environmentSetup.sh && getAndroidSDK)
 
 test:
   pre:
