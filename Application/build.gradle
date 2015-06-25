@@ -1,8 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 'android-MNC'
+    buildToolsVersion '23.0.0 rc2'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.eazyigz.RussiaMediaSearch"
         minSdkVersion rootProject.ext.minSdk
@@ -25,12 +33,17 @@ android {
     }
 }
 
+def parcelablePlease = '1.0.1'
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.android.support:support-annotations:22.2.0'
     compile 'com.jakewharton:butterknife:6.1.0'
+    apt 'com.android.databinding:compiler:1.0-rc0'
+
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
         exclude group: 'com.android.support', module: 'appcompat'
@@ -40,16 +53,21 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test:rules:0.3'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
-}
 
-project.ext.preDexLibs = !project.hasProperty('disablePreDex')
+    compile 'com.google.code.gson:gson:2.1'
+    compile 'com.mindscapehq.android:raygun4android:1.3.0:sources'
 
-subprojects {
-    project.plugins.whenPluginAdded { plugin ->
-        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        }
-    }
+    compile 'com.hannesdorfmann.parcelableplease:annotation:' + parcelablePlease
+    apt 'com.hannesdorfmann.parcelableplease:processor:' + parcelablePlease
+
+    apt 'frankiesardo:icepick-processor:3.0.3-SNAPSHOT'
+    compile 'com.google.dagger:dagger:2.0'
+    apt 'com.google.dagger:dagger-compiler:2.0'
+    compile 'javax.annotation:javax.annotation-api:1.2'
+
+    // MVP (mosby)
+    compile 'com.hannesdorfmann.mosby:core:1.1.0'
+    compile 'com.hannesdorfmann.mosby:rx:1.1.0'
+    compile 'com.hannesdorfmann.mosby:viewstate:1.1.0'
+    apt 'com.hannesdorfmann.fragmentargs:processor:2.1.2'
 }
