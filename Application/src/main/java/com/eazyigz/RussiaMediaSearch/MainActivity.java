@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), "Search");
-        adapter.addFragment(new CheeseListFragment(), "YouTube");
-        adapter.addFragment(new CheeseListFragment(), "Yandex");
-        adapter.addFragment(new CheeseListFragment(), "Google");
-        adapter.addFragment(new CheeseListFragment(), "VKontakte");
+        adapter.addFragment(new CheesesFragment(), "Search");
+        adapter.addFragment(new CheesesFragment(), "YouTube");
+        adapter.addFragment(new CheesesFragment(), "Yandex");
+        adapter.addFragment(new CheesesFragment(), "Google");
+        adapter.addFragment(new CheesesFragment(), "VKontakte");
         viewPager.setAdapter(adapter);
     }
 

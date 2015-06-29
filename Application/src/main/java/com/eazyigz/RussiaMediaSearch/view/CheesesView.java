@@ -1,6 +1,9 @@
 package com.eazyigz.RussiaMediaSearch.view;
 
-import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.eazyigz.RussiaMediaSearch.model.Cheese;
+import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
-public interface CheesesView extends MvpView {
+import java.util.List;
+
+public interface CheesesView extends MvpLceView<List<Cheese>> {
 }

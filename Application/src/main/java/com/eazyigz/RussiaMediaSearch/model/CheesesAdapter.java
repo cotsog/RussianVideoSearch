@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 
 import com.eazyigz.RussiaMediaSearch.R;
 import com.eazyigz.RussiaMediaSearch.databinding.ListItemBinding;
-import com.eazyigz.RussiaMediaSearch.view.Cheese;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,9 +27,9 @@ public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHold
 
     @Override
     public CheesesAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        mCheeses.add(new Cheese("new cheese"));
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        final ListItemBinding binding = DataBindingUtil.inflate(
-                inflater, R.layout.list_item, parent, false);
+        final ListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item, parent, false);
 
         return new ViewHolder(binding.getRoot(), binding);
     }
@@ -64,8 +62,8 @@ public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHold
     }
 
     @UiThread
-    public void addItems(final Cheese[] cheeses) {
-        this.mCheeses.addAll(Arrays.asList(cheeses));
+    public void addItems(final List<Cheese> cheeses) {
+        this.mCheeses.addAll(cheeses);
         this.dataSetChanged();
     }
 
