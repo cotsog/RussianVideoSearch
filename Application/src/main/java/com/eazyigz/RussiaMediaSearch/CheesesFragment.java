@@ -13,6 +13,7 @@ import com.eazyigz.RussiaMediaSearch.model.Cheese;
 import com.eazyigz.RussiaMediaSearch.model.CheesesAdapter;
 import com.eazyigz.RussiaMediaSearch.presenter.CheesesPresenter;
 import com.eazyigz.RussiaMediaSearch.view.CheesesView;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
@@ -83,6 +84,13 @@ public class CheesesFragment extends Fragment implements CheesesView<Cheese> {
     @Override
     public void showError() {
         binding.errorView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = MyApp.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
 }

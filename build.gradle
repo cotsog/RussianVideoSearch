@@ -21,6 +21,10 @@ allprojects {
         maven {
             url 'https://clojars.org/repo/'
         }
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
 }
 
