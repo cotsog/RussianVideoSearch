@@ -17,17 +17,10 @@ import java.util.List;
  * Created by Igor on 6/22/2015.
  */
 public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHolder> {
-    private final View empty;
-
     private List<Cheese> mCheeses = new ArrayList<>();
-
-    public CheesesAdapter(final View empty) {
-        this.empty = empty;
-    }
 
     @Override
     public CheesesAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
-        mCheeses.add(new Cheese("new cheese"));
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final ListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item, parent, false);
 
@@ -52,7 +45,6 @@ public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHold
 
     private void dataSetChanged() {
         this.notifyDataSetChanged();
-        this.empty.setVisibility(this.getItemCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @UiThread

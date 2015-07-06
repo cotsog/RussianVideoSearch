@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cheeseRecyclerview"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
+        android:id="@+id/cheeseFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/no_cheeses"
-        style="@style/Base.TextAppearance.AppCompat.Medium"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cheeseRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/empty"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_cheeses"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/errorView"
+            style="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/loading_error"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</layout>

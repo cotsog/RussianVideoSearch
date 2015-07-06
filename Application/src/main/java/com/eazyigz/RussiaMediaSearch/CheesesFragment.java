@@ -2,81 +2,87 @@ package com.eazyigz.RussiaMediaSearch;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
-import com.eazyigz.RussiaMediaSearch.dagger.CheeseModule;
-import com.eazyigz.RussiaMediaSearch.dagger.CheesesComponent;
-import com.eazyigz.RussiaMediaSearch.dagger.DaggerCheesesComponent;
+import com.eazyigz.RussiaMediaSearch.databinding.FragmentCheeseListBinding;
 import com.eazyigz.RussiaMediaSearch.model.Cheese;
 import com.eazyigz.RussiaMediaSearch.model.CheesesAdapter;
 import com.eazyigz.RussiaMediaSearch.presenter.CheesesPresenter;
 import com.eazyigz.RussiaMediaSearch.view.CheesesView;
-import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
 import java.util.List;
-
-import butterknife.InjectView;
 
 /**
  * Created by Igor on 6/14/2015.
  */
-public class CheesesFragment extends MvpFragment<CheesesView, CheesesPresenter> implements CheesesView {
-    @InjectView(R.id.cheeseRecyclerview) RecyclerView recyclerView;
-    @InjectView(R.id.empty) TextView empty;
+public class CheesesFragment extends Fragment implements CheesesView<Cheese> {
 
     private CheesesAdapter mAdapter;
-    private CheesesComponent mCheesesComponent;
+    private CheesesPresenter mCheesesPresenter;
+    private FragmentCheeseListBinding binding;
 
     @Override
-    protected void injectDependencies() {
-        mCheesesComponent = DaggerCheesesComponent.builder().cheeseModule(new CheeseModule()).build();
-        mCheesesComponent.inject(this);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCheesesPresenter = new CheesesPresenter(this);
+        mCheesesPresenter.loadCheeses();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_cheese_list, container, false);
+        binding = FragmentCheeseListBinding.bind(view);
+        return view;
     }
 
     @Override
-    protected int getLayoutRes() {
-        return R.layout.fragment_cheese_list;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupRecyclerView();
     }
 
-    @Override
-    public CheesesPresenter createPresenter() {
-        return mCheesesComponent.cheesesPresenter();
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstance) {
-        super.onViewCreated(view, savedInstance);
-
+    private void setupRecyclerView() {
         // Setup recycler view
-        mAdapter = new CheesesAdapter(empty);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(mAdapter);
+        mAdapter = new CheesesAdapter();
+        binding.cheeseRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.cheeseRecyclerview.setHasFixedSize(true);
+        binding.cheeseRecyclerview.setAdapter(mAdapter);
     }
 
     @Override
-    public void showLoading(boolean pullToRefresh) {
+    public void onResume() {
+        super.onResume();
 
+        if (mAdapter.getItemCount() == 0) {
+            binding.empty.setVisibility(View.VISIBLE);
+        } else {
+            binding.empty.setVisibility(View.GONE);
+        }
     }
 
     @Override
-    public void showContent() {
+    public void addItem(final Cheese cheese) {
+        mAdapter.addItem(cheese);
     }
 
     @Override
-    public void showError(Throwable e, boolean pullToRefresh) {
+    public void addItems(final List<Cheese> cheeses) {
+        mAdapter.addItems(cheeses);
     }
 
     @Override
-    public void setData(List<Cheese> data) {
-        mAdapter.addItems(data);
+    public void clearItems() {
+        mAdapter.clearItems();
     }
 
     @Override
-    public void loadData(boolean pullToRefresh) {
-        presenter.loadCheeses();
+    public void showError() {
+        binding.errorView.setVisibility(View.VISIBLE);
     }
+
 }

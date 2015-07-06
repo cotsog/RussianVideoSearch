@@ -1,9 +1,13 @@
 package com.eazyigz.RussiaMediaSearch.view;
 
-import com.eazyigz.RussiaMediaSearch.model.Cheese;
-import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
-
 import java.util.List;
 
-public interface CheesesView extends MvpLceView<List<Cheese>> {
+public interface CheesesView<Cheese> {
+    void addItem(Cheese item);
+
+    void addItems(List<Cheese> items);
+
+    void clearItems();
+
+    void showError();
 }

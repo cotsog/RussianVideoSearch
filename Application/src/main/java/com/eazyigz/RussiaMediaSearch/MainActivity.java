@@ -11,22 +11,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.newrelic.agent.android.NewRelic;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class MainActivity extends AppCompatActivity {
 
-    @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.tabs) TabLayout tabLayout;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.tabs) TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         tabLayout.setupWithViewPager(viewPager);
+
+        NewRelic.withApplicationToken("AAac30293564af169b12daa0b6a01770bb0a14c0c0"
+        ).start(this.getApplication());
     }
 
 
