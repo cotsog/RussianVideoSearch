@@ -1,14 +1,9 @@
 package com.eazyigz.RussiaMediaSearch.presenter;
 
-import com.eazyigz.RussiaMediaSearch.dagger.CheeseModule;
-import com.eazyigz.RussiaMediaSearch.dagger.CheesesComponent;
-import com.eazyigz.RussiaMediaSearch.dagger.DaggerCheesesComponent;
 import com.eazyigz.RussiaMediaSearch.model.Cheese;
 import com.eazyigz.RussiaMediaSearch.view.CheesesView;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Observer;
@@ -19,12 +14,9 @@ import rx.Observer;
  */
 public class CheesesPresenter implements Observer<List<Cheese>> {
     private final CheesesView<Cheese> view;
-    private CheesesComponent mCheesesComponent;
 
-    @Inject
     public CheesesPresenter(final CheesesView cheesesView) {
         this.view = cheesesView;
-        injectDependencies();
     }
 
     public void loadCheeses() {
@@ -52,11 +44,6 @@ public class CheesesPresenter implements Observer<List<Cheese>> {
     public void onNext(List<Cheese> cheeses) {
         this.view.clearItems();
         this.view.addItems(cheeses);
-    }
-
-    private void injectDependencies() {
-        mCheesesComponent = DaggerCheesesComponent.builder().cheeseModule(new CheeseModule()).build();
-        mCheesesComponent.inject(this);
     }
 
 }

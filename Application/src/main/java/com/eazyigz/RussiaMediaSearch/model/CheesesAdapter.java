@@ -1,8 +1,11 @@
 package com.eazyigz.RussiaMediaSearch.model;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +20,32 @@ import java.util.List;
  * Created by Igor on 6/22/2015.
  */
 public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHolder> {
-    private List<Cheese> mCheeses = new ArrayList<>();
+    private final TypedValue mTypedValue = new TypedValue();
+    private final View empty;
+    @NonNull private List<Cheese> mCheeses = new ArrayList<>();
+    private int mBackground;
 
+
+    public CheesesAdapter(@NonNull Context context, List<Cheese> items, final View empty) {
+        this.empty = empty;
+        context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
+        mBackground = mTypedValue.resourceId;
+        addItems(items);
+    }
+
+    @NonNull
     @Override
-    public CheesesAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    public CheesesAdapter.ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final ListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item, parent, false);
+        View view = binding.getRoot();
+        view.setBackgroundResource(mBackground);
 
-        return new ViewHolder(binding.getRoot(), binding);
+        return new ViewHolder(view, binding);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Cheese cheese = this.mCheeses.get(position);
         holder.bind(cheese);
     }
@@ -45,6 +62,7 @@ public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHold
 
     private void dataSetChanged() {
         this.notifyDataSetChanged();
+        this.empty.setVisibility(this.getItemCount() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @UiThread
@@ -54,7 +72,7 @@ public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHold
     }
 
     @UiThread
-    public void addItems(final List<Cheese> cheeses) {
+    public void addItems(@NonNull final List<Cheese> cheeses) {
         this.mCheeses.addAll(cheeses);
         this.dataSetChanged();
     }
@@ -65,10 +83,10 @@ public class CheesesAdapter extends RecyclerView.Adapter<CheesesAdapter.ViewHold
         this.dataSetChanged();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private final ListItemBinding binding;
 
-        public ViewHolder(final View view, final ListItemBinding binding) {
+        public ViewHolder(@NonNull final View view, final ListItemBinding binding) {
             super(view);
             this.binding = binding;
         }

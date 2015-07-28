@@ -1,7 +1,5 @@
 package com.eazyigz.RussiaMediaSearch.dagger;
 
-import com.eazyigz.RussiaMediaSearch.presenter.CheesesPresenter;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -12,6 +10,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = CheeseModule.class)
 public interface CheesesComponent {
-    void inject(CheesesPresenter presenter);
 
 }
