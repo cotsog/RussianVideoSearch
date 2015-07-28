@@ -13,9 +13,11 @@ dependencies:
 test:
   pre:
     - chmod +x ./gradlew
+  override:
     # start the emulator
     - $ANDROID_HOME/tools/emulator -avd testAVD -no-skin -no-audio -no-window:
       background: true
+      parallel: true
     # build code from /app direcctory
     - ./gradlew assembleDebug:
       timeout: 1200
@@ -24,7 +26,6 @@ test:
       timeout: 1200
     # wait for it to have booted
     - (source scripts/environmentSetup.sh && waitForAVD)
-  override:
     # run tests  against the emulator.
     - ./gradlew connectedAndroidTest
     # copy the test results to the test results directory.
