@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.android.databinding'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-//apply plugin: 'newrelic'
+apply plugin: 'newrelic'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 android {

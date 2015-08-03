@@ -1,5 +1,6 @@
 machine:
   environment:
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
     ANDROID_HOME: /home/ubuntu/android
   java:
     version: oraclejdk8
@@ -9,17 +10,16 @@ dependencies:
     - ~/.android
     - ~/android
   override:
-    - (echo "Downloading Android SDK v22 now!")
-    - (source scripts/environmentSetup.sh && getAndroidSDK)
+      - (echo "Downloading Android SDK v22 now!")
+      - (source scripts/environmentSetup.sh && getAndroidSDK)
 
 test:
   pre:
-    - chmod +x ./gradlew
+      - (chmod +x ./gradlew)
   override:
       # start the emulator
       - $ANDROID_HOME/tools/emulator -avd testAVD -no-skin -no-audio -no-window:
           background: true
-          parallel: true
       # build code from /app direcctory
       - ./gradlew assembleDebug:
           timeout: 1200

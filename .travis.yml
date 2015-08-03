@@ -1,5 +1,8 @@
 sudo: false
 language: android
+env:
+  global:
+    - TERM=dumb
 
 android:
   components:
@@ -9,13 +12,8 @@ android:
     # Emulator components
     - sys-img-armeabi-v7a-android-22
 
-    - add-on
-    - extra
-
   licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'android-googletv-license-99eda7fb'
+    - '.+'
 
 jdk:
   - oraclejdk8
@@ -36,7 +34,18 @@ before_script:
 
 #define test scripts here
 script:
-  - ./gradlew assemble test
+  - ./gradlew connectedAndroidTest
 
-#upload build to TestDroid or Apkudo
 after_success:
+  - echo "Tests finished successfully"
+
+after_script:
+  # upload test results to s3 bucket
+#  - echo "Uploading test results to https://chaione-app-store.s3.amazonaws.com/android/DrNow/androidTests/connected/index.html"
+#  - s3cmd put sync --recursive --acl-private --guess-mime-type --config=../.s3cfg app/build/reports/androidTests/connected s3://chaione-app-store/android/DrNow/androidTests/
+
+cache:
+  directories:
+    - $HOME/.gradle
+    - $HOME/.m2
+
