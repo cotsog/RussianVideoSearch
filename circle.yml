@@ -22,8 +22,6 @@ test:
           background: true
       # build code from /app direcctory
       - ./gradlew clean assemble -PdisablePreDex
-      # build code from /androidTest direcctory
-      - ./gradlew assembleDebugTest
       # wait for it to have booted
       - (source scripts/environmentSetup.sh && waitForAVD)
       # run tests  against the emulator.

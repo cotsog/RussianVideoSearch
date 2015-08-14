@@ -18,7 +18,7 @@ function getAndroidSDK(){
   fi
 }
 
-function waitAVD() {
+function waitForAVD() {
     local bootanim=""
     export PATH=$(dirname $(dirname $(which android)))/platform-tools:$PATH
     until [[ "$bootanim" =~ "stopped" ]]; do
