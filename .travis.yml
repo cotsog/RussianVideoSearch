@@ -36,6 +36,7 @@ before_script:
 
 #define test scripts here
 script:
+  - ./gradlew clean assemble -PdisablePreDex
   - ./gradlew connectedAndroidTest
 
 after_success:
