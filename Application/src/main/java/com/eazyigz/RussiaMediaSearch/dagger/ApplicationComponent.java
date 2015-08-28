@@ -8,7 +8,7 @@ import dagger.Component;
  * Created by Igor on 6/29/2015.
  */
 @Singleton
-@Component(modules = CheeseModule.class)
-public interface CheesesComponent {
+@Component(modules = ApiModule.class)
+public interface ApplicationComponent {
 
 }
