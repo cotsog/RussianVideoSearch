@@ -23,7 +23,7 @@ test:
       # build code from /app direcctory
       - ./gradlew clean assemble -PdisablePreDex
       # wait for it to have booted
-      - (source scripts/environmentSetup.sh && waitForAVD):
+      - (source scripts/environmentSetup.sh && waitForAVD)
           timeout: 1200
       # run tests  against the emulator.
       - ./gradlew connectedAndroidTest
