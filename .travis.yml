@@ -1,5 +1,4 @@
 # Trigger
-sudo: false
 language: android
 env:
   global:
