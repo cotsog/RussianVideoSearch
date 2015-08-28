@@ -24,9 +24,7 @@ test:
       - ./gradlew clean assemble -PdisablePreDex
       # wait for it to have booted
       - (source scripts/environmentSetup.sh && waitForAVD)
-          timeout: 1200
       # run tests  against the emulator.
       - ./gradlew connectedAndroidTest
-          timeout: 1200
       # copy the test results to the test results directory.
       - cp -r Application/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
