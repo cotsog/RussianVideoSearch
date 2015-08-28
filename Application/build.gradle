@@ -4,6 +4,7 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'newrelic'
 apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'de.undercouch.download'
 
 android {
     compileSdkVersion 23

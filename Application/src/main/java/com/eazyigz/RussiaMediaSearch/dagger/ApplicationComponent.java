@@ -1,14 +1,17 @@
 package com.eazyigz.RussiaMediaSearch.dagger;
 
+import com.eazyigz.RussiaMediaSearch.MainActivity;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
 
 /**
- * Created by Igor on 6/29/2015.
+ * A {@link Component} for {@link com.eazyigz.RussiaMediaSearch.dagger.ApiModule}.
  */
 @Singleton
 @Component(modules = ApiModule.class)
 public interface ApplicationComponent {
+    void inject(MainActivity mainActivity);
 
 }
