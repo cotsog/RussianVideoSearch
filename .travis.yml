@@ -39,7 +39,7 @@ script:
   # disable predexing on build server
   - ./gradlew clean assemble -PdisablePreDex
   # run tests  against the emulator
-  - ./gradlew connectedAndroidTest
+  - ./gradlew connectedAndroidTest -PdisablePreDex
 
 after_success:
   - echo "Tests finished successfully"
