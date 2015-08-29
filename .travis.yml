@@ -2,6 +2,7 @@ language: android
 env:
   global:
     - TERM=dumb
+    - ADB_INSTALL_TIMEOUT=8
 
 android:
   components:
